@@ -1,0 +1,7 @@
+#chat-list .chat-me .am-list-extra{
+	flex-basis: auto;
+}
+#chat-list .chat-me .am-list-content{
+	padding-right: 15px;
+	text-align: right
+}
