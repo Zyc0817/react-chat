@@ -44,6 +44,9 @@ class Geniusinfo extends React.Component {
 				})
 				console.log(this.state.data)
 			})
+		if (!this.props.chat.chatmsg.length) {
+			this.props.getMsgList()
+		}
 	}
 	handleClick(v) {
 		this.props.history.push(`/chat/${v._id}`)
