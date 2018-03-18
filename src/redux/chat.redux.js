@@ -54,13 +54,11 @@ export function sendMsg({from, to, msg}) {
 }
 
 export function getMsgList() {
-	return (dispatch, getState) => {
-		axios.get('/user/getmsglist')
-			.then(res => {
-				if(res.status === 200 && res.data.code === 0) {
-					const userid = getState().user._id
-					dispatch(msgList(res.data.msgs, res.data.users, userid))
-				}
-			})
+	return async (dispatch, getState) => {
+		const res = await axios.get('/user/getmsglist')
+		if(res.status === 200 && res.data.code === 0) {
+			const userid = getState().user._id
+			dispatch(msgList(res.data.msgs, res.data.users, userid))
+		}
 	}
 }

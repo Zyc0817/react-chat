@@ -1,7 +1,9 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const cookieParser = require('cookie-parser')
-const userRouter = require('./user')
+import express from 'express'
+import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
+import userRouter from './user'
+import React from 'react'
+import {renderToString, renderToStaticMarkup} from 'react-dom/server'
 const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
@@ -20,6 +22,11 @@ io.on('connection', function(socket) {
 		})
 	})
 })
+
+function App() {
+	return <h2>server render</h2>
+}
+console.log(App())
 
 
 app.use(cookieParser())
