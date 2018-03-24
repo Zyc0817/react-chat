@@ -4,30 +4,23 @@ import { List, InputItem, WingBlank, WhiteSpace, Button, Radio } from 'antd-mobi
 import { connect } from 'react-redux'
 import { register } from '../../redux/user.redux'
 import { Redirect } from 'react-router-dom'
+import Form from '../../component/form/form'
 
 @connect(
 	state => state.user,
 	{register}
 )
-
+@Form
 class Login extends React.Component {
 	constructor(props) {
 		super(props)
 		this.handleRegister = this.handleRegister.bind(this)
-		this.state = {
-			user: '',
-			pwd: '',
-			repeatpwd: '',
-			type: 'genius' //或者boss
-		}
 	}
-	handleChange(key, val) {
-		this.setState({
-			[key]: val
-		})
+	componentDidMount() {
+		this.props.handleChange('type', 'genius')
 	}
 	handleRegister() {
-		this.props.register(this.state)
+		this.props.register(this.props.state)
 	}
 	render() {
 		const RadioItem = Radio.RadioItem
@@ -38,27 +31,27 @@ class Login extends React.Component {
 				<List>
 					{this.props.msg? <p>{this.props.msg}</p> : null}
 					<InputItem 
-					onChange={v => this.handleChange('user', v)}
+					onChange={v => this.props.handleChange('user', v)}
 					>用户名</InputItem>
 					<WhiteSpace/>				
 					<InputItem
 					type='password'
-					onChange={v => this.handleChange('pwd', v)}
+					onChange={v => this.props.handleChange('pwd', v)}
 					>密码</InputItem>
 					<WhiteSpace/>
 					<InputItem
 					type='password'
-					onChange={v => this.handleChange('repeatpwd', v)}
+					onChange={v => this.props.handleChange('repeatpwd', v)}
 					>确认密码</InputItem>
 					<WhiteSpace/>
-					<RadioItem checked={this.state.type=='genius'}
-					onChange={() => this.handleChange('type', 'genius')}
+					<RadioItem checked={this.props.state.type=='genius'}
+					onChange={() => this.props.handleChange('type', 'genius')}
 					>
 						牛人
 					</RadioItem>
 					<WhiteSpace/>
-					<RadioItem checked={this.state.type=='boss'}
-					onChange={() => this.handleChange('type', 'boss')}
+					<RadioItem checked={this.props.state.type=='boss'}
+					onChange={() => this.props.handleChange('type', 'boss')}
 					>
 						BOSS
 					</RadioItem>
