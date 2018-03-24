@@ -5,6 +5,7 @@ import { getMsgList, sendMsg, recvMsg } from '../../redux/chat.redux'
 import { withRouter } from 'react-router-dom'
 import './chat.css'
 import { getChatId } from '../../util'
+import QueueAnim from 'rc-queue-anim'
 @withRouter
 
 @connect(
@@ -38,21 +39,23 @@ class Chat extends React.Component{
 				}} icon={<Icon type="left" />}>
 					{users[userid].name}
 				</NavBar>
-				{chatmsgs.map((v, i) => {
-					return v.from == userid?(
-						<List key={v._id}>
-							<Item
-							>{v.content}</Item>
-						</List>
-						):(
-						<List key={i}>
-							<Item
-								extra={'avatar'}
-								className="chat-me"
-							>{v.content}</Item>
-						</List>
-						)
-				})}
+				<QueueAnim delay={100}>
+					{chatmsgs.map((v, i) => {
+						return v.from == userid?(
+							<List key={v._id}>
+								<Item
+								>{v.content}</Item>
+							</List>
+							):(
+							<List key={i}>
+								<Item
+									extra={'avatar'}
+									className="chat-me"
+								>{v.content}</Item>
+							</List>
+							)
+					})}
+				</QueueAnim>
 				<div className="stick-footer" style={{'position': 'fixed','width':'100%',bottom:0}}>
 					<List>
 						<InputItem

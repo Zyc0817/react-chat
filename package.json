@@ -57,6 +57,7 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
     "mongoose": "^5.0.7",
+    "rc-queue-anim": "^1.4.1",
     "react": "^15.4.1",
     "react-addons-css-transition-group": "^15.4.1",
     "react-addons-perf": "^15.4.1",
